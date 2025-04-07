@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Nama</title>
+    <title>Login</title>
     <link rel="stylesheet" href="{{ asset('css/loginstyle.css') }}">
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -18,7 +18,7 @@
             <div class="modal-body">
                 <p>Log in to your account to read the latest news and also discuss in the comments column!</p>
 
-                {{-- action="{{ route('login') }}" DISAMPING METHOD--}}
+                {{-- action="{{ route('login') }}"DISAMPING  METHOD--}}
                 <form method="POST">
                     @csrf
 
@@ -55,8 +55,7 @@
                     </div>
 
                     <div class="register-link">
-                        You do not have account yet? <a href="">Register</a>
-                        {{-- "{{ route('register') }}" DIDLM HREF --}}
+                        You do not have account yet? <a href="{{ route('register') }}">Register</a>
                     </div>
                 </form>
             </div>

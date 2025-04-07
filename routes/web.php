@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,4 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [LoginController::class, 'login']);
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::redirect('/', '/login');
+
+Route::get('/register', [RegisterController::class, 'register'])->name('register');
