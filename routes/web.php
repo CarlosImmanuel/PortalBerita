@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', [LoginController::class, 'login'])->name('login');
-Route::redirect('/', '/login');
+// Route::get('/login', [LoginController::class, 'login'])->name('login');
+// Route::redirect('/', '/login');
 
-Route::get('/register', [RegisterController::class, 'register'])->name('register');
+// Route::get('/register', [RegisterController::class, 'register'])->name('register');
+
+Route::get('/', [NewsController::class, 'index']);

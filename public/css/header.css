@@ -1,0 +1,22 @@
+.sign {
+    margin-right: 8px;
+    border-radius: 5px;
+    color: white;
+    background-color: blue;
+    padding: 10px;
+    border: none;
+}
+.sign:hover {
+    transform: scale(1.05);
+    color: white;
+    background-color: darkblue;
+}
+
+.regis {
+    text-decoration: none;
+    color: black;
+}
+.regis:hover {
+    transform: scale(1.05);
+    color: black;
+}
