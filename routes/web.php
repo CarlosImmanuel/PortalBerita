@@ -22,3 +22,4 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/register', [RegisterController::class, 'register'])->name('register');
 
 Route::get('/', [NewsController::class, 'index']);
+Route::get('/load-news/{kategori}', [NewsController::class, 'loadMoreNews']);
