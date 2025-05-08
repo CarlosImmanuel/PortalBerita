@@ -53,7 +53,9 @@
             <img src="{{ $item['urlToImage'] ?? asset('images/default.jpg') }}" class="card-img-top" alt="News Image">
             <div class="card-body">
                 <span class="badge-news">Umum</span>
-                <p class="card-text">{{ $item['title'] }}</p>
+                <a href="{{ route('detail', ['title' => urlencode($item['title'])]) }}" class="card-text d-block text-decoration-none text-dark">
+                    {{ $item['title'] }}
+                  </a>
             </div>
             </div>
         </div>
@@ -71,7 +73,9 @@
             <img src="{{ $item['urlToImage'] ?? asset('images/default.jpg') }}" class="card-img-top" alt="News Image">
             <div class="card-body">
                 <span class="badge-news">Kesehatan</span>
-                <p class="card-text">{{ $item['title'] }}</p>
+                <a href="{{ route('detail', ['title' => urlencode($item['title'])]) }}" class="card-text d-block text-decoration-none text-dark">
+                    {{ $item['title'] }}
+                  </a>
             </div>
             </div>
         </div>
@@ -89,7 +93,9 @@
             <img src="{{ $item['urlToImage'] ?? asset('images/default.jpg') }}" class="card-img-top" alt="News Image">
             <div class="card-body">
                 <span class="badge-news">Ekonomi</span>
-                <p class="card-text">{{ $item['title'] }}</p>
+                <a href="{{ route('detail', ['title' => urlencode($item['title'])]) }}" class="card-text d-block text-decoration-none text-dark">
+                    {{ $item['title'] }}
+                  </a>
             </div>
             </div>
         </div>
@@ -107,7 +113,9 @@
             <img src="{{ $item['urlToImage'] ?? asset('images/default.jpg') }}" class="card-img-top" alt="News Image">
             <div class="card-body">
                 <span class="badge-news">Teknologi</span>
-                <p class="card-text">{{ $item['title'] }}</p>
+                <a href="{{ route('detail', ['title' => urlencode($item['title'])]) }}" class="card-text d-block text-decoration-none text-dark">
+                    {{ $item['title'] }}
+                  </a>
             </div>
             </div>
         </div>
@@ -125,7 +133,9 @@
             <img src="{{ $item['urlToImage'] ?? asset('images/default.jpg') }}" class="card-img-top" alt="News Image">
             <div class="card-body">
                 <span class="badge-news">Hiburan</span>
-                <p class="card-text">{{ $item['title'] }}</p>
+                <a href="{{ route('detail', ['title' => urlencode($item['title'])]) }}" class="card-text d-block text-decoration-none text-dark">
+                    {{ $item['title'] }}
+                  </a>
             </div>
             </div>
         </div>
@@ -143,7 +153,9 @@
             <img src="{{ $item['urlToImage'] ?? asset('images/default.jpg') }}" class="card-img-top" alt="News Image">
             <div class="card-body">
                 <span class="badge-news">Olahraga</span>
-                <p class="card-text">{{ $item['title'] }}</p>
+                <a href="{{ route('detail', ['title' => urlencode($item['title'])]) }}" class="card-text d-block text-decoration-none text-dark">
+                    {{ $item['title'] }}
+                  </a>
             </div>
             </div>
         </div>
@@ -161,7 +173,9 @@
             <img src="{{ $item['urlToImage'] ?? asset('images/default.jpg') }}" class="card-img-top" alt="News Image">
             <div class="card-body">
                 <span class="badge-news">Sains</span>
-                <p class="card-text">{{ $item['title'] }}</p>
+                <a href="{{ route('detail', ['title' => urlencode($item['title'])]) }}" class="card-text d-block text-decoration-none text-dark">
+                    {{ $item['title'] }}
+                  </a>
             </div>
             </div>
         </div>
@@ -224,6 +238,11 @@
         }
     });
     });
+
+    console.log('%c📊 NewsAPI Rate Info:', 'color: #00aaff; font-weight: bold;');
+    console.log('🔢 Limit:', '{{ $limit ?? "N/A" }}');
+    console.log('✅ Sisa:', '{{ $remaining ?? "N/A" }}');
+    console.log('⏰ Reset jam:', '{{ $reset ? date("H:i:s", $reset) : "N/A" }}');
     </script>
 
 </body>

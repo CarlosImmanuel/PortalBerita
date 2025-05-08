@@ -23,3 +23,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [NewsController::class, 'index']);
 Route::get('/load-news/{kategori}', [NewsController::class, 'loadMoreNews']);
+Route::get('/detail', [NewsController::class, 'show'])->name('detail');
