@@ -2,6 +2,7 @@
     background-color: #f8f9fa;
     padding: 20px;
     height: 100%;
+    border-radius: 8px;
   }
 
   .sidebar ul {
@@ -35,7 +36,7 @@
     color: white;
     background-color: rgba(0,0,0,0.6);
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 8px;
     text-align: center;
 }
 
@@ -93,3 +94,16 @@
   .card-text {
     text-align: left;
   }
+
+  .kategori-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.kategori-scroll::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 8px;
+}
+
+.kategori-scroll:hover::-webkit-scrollbar-thumb {
+  background-color: #555;
+}

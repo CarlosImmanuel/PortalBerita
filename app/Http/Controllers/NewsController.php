@@ -4,126 +4,94 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
     public function index()
     {
-        $apiKey = '53ccf02bccb34a33afbe2f167c20e8f0';
-        $baseUrl = 'https://newsapi.org/v2/top-headlines';
-
-        $categories = [
-            'ekonomi'     => 'business',
-            'hiburan'     => 'entertainment',
-            'umum'        => 'general',
-            'teknologi'   => 'technology',
-            'olahraga'    => 'sports',
-            'sains'       => 'science',
-            'kesehatan'   => 'health',
-        ];
-
-        $topHeadlinesResponse = Http::get($baseUrl, [
-            'country' => 'us',
-            'apiKey' => $apiKey
+        // Step 1: Login ke API untuk dapetin api_key
+        $loginResponse = Http::post('https://winnicode.com/api/login', [
+            'email' => 'dummy@dummy.com',
+            'password' => 'dummy'
         ]);
 
-        $topHeadlines = Cache::remember('top_headlines', 3600, function () use ($topHeadlinesResponse) {
-            return $topHeadlinesResponse->json()['articles'] ?? [];
-        });
+        // Cek apakah login berhasil
+        if ($loginResponse->successful()) {
+            $apiKey = $loginResponse->json()['api_key'] ?? null;
 
-        $limit = $topHeadlinesResponse->header('X-RateLimit-Limit');
-        $remaining = $topHeadlinesResponse->header('X-RateLimit-Remaining');
-        $reset = $topHeadlinesResponse->header('X-RateLimit-Reset');
+            if ($apiKey) {
+                // Step 2: Ambil berita pakai Bearer Token
+                $newsResponse = Http::withToken($apiKey)->get('https://winnicode.com/api/publikasi-berita');
 
-        $data = [];
-        foreach ($categories as $key => $apiCategory) {
-            $data[$key] = Cache::remember("news_$key", 3600, function () use ($baseUrl, $apiKey, $apiCategory) {
-                $response = Http::get($baseUrl, [
-                    'country' => 'us',
-                    'category' => $apiCategory,
-                    'apiKey' => $apiKey
-                ]);
-                return array_slice($response->json()['articles'] ?? [], 0, 6);
-            });
-        }
+                if ($newsResponse->successful()) {
+                    $news = $newsResponse->json();
 
-        return view('homepage', array_merge(
-            ['topHeadlines' => $topHeadlines],
-            $data,
-            ['limit' => $limit, 'remaining' => $remaining, 'reset' => $reset]
-        ));
-    }
+                    // Convert ke collection biar gampang diolah
+                    $newsCollection = collect($news);
 
-    public function loadMoreNews($kategori)
-    {
-        $apiKey = '53ccf02bccb34a33afbe2f167c20e8f0';
-        $baseUrl = 'https://newsapi.org/v2/top-headlines';
+                    // Ambil 1 berita utama paling atas
+                    $headline = $newsCollection->first();
 
-        $response = Http::get($baseUrl, [
-            'country' => 'us',
-            'category' => $kategori,
-            'apiKey' => $apiKey
-        ]);
+                    // Ambil sisanya & kelompokkan per kategori
+                    $groupedNews = $newsCollection->slice(1)->groupBy('kategori');
 
-        if ($response->successful()) {
-            return response()->json($response->json()['articles'] ?? []);
+                    // Kirim ke view
+                    return view('homepage', [
+                        'headline' => $headline,
+                        'groupedNews' => $groupedNews
+                    ]);
+                } else {
+                    return view('homepage', [
+                        'headline' => null,
+                        'groupedNews' => collect()
+                    ]);
+                }
+            } else {
+                return response()->json(['error' => 'Gagal mendapatkan API Key'], 500);
+            }
         } else {
-            return response()->json(['error' => 'Gagal ambil berita'], 500);
+            return response()->json(['error' => 'Login gagal'], 500);
         }
     }
 
-    public function show(Request $request)
+    public function show($id)
     {
-        $title = urldecode($request->query('title'));
-
-        $apiKey = '53ccf02bccb34a33afbe2f167c20e8f0';
-        $baseUrl = 'https://newsapi.org/v2/top-headlines';
-
-        $response = Http::get($baseUrl, [
-            'country' => 'us',
-            'apiKey' => $apiKey
+        // Langkah 1: Login untuk dapatkan API Key
+        $loginResponse = Http::post('https://winnicode.com/api/login', [
+            'email' => 'dummy@dummy.com',
+            'password' => 'dummy'
         ]);
 
-        $articles = $response->json()['articles'] ?? [];
-
-        $selected = collect($articles)->firstWhere('title', $title);
-
-        if (!$selected) {
-            return abort(404);
+        if (!$loginResponse->successful()) {
+            return abort(500, 'Login API gagal');
         }
 
-        // Filter artikel lain yang berbeda dari yang sedang dibuka
-        $otherNews = collect($articles)
-            ->where('title', '!=', $selected['title'])
+        $apiKey = $loginResponse->json()['api_key'] ?? null;
+
+        if (!$apiKey) {
+            return abort(500, 'API Key tidak ditemukan');
+        }
+
+        // Langkah 2: Ambil semua berita
+        $response = Http::withToken($apiKey)->get('https://winnicode.com/api/publikasi-berita');
+        $newsList = $response->successful() ? $response->json() : [];
+
+        // Langkah 3: Cari berita berdasarkan ID
+        $selectedNews = collect($newsList)->firstWhere('id', $id);
+
+        if (!$selectedNews) {
+            return abort(404, 'Berita tidak ditemukan');
+        }
+
+        // Ambil 4 berita lain (selain yang dibuka)
+        $otherNews = collect($newsList)
+            ->where('id', '!=', $id)
             ->take(4)
             ->values()
-            ->toArray();
-
-        // Cari related news berdasarkan kategori
-        $category = $selected['category'] ?? 'general';
-        $relatedResponse = Http::get($baseUrl, [
-            'country' => 'us',
-            'category' => $category,
-            'apiKey' => $apiKey
-        ]);
-
-        $relatedArticles = $relatedResponse->json()['articles'] ?? [];
-
-        $relatedNews = collect($relatedArticles)
-            ->where('title', '!=', $selected['title'])
-            ->take(4)
-            ->map(function ($item) use ($category) {
-                $item['category'] = $category;
-                return $item;
-            })
-            ->values()
-            ->toArray();
+            ->all();
 
         return view('detail', [
-            'news' => $selected,
-            'relatedNews' => $relatedNews,
+            'news' => $selectedNews,
             'otherNews' => $otherNews
         ]);
     }

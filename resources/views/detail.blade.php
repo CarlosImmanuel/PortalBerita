@@ -20,58 +20,47 @@
     <div class="container mt-5">
         {{-- Judul dan Metadata --}}
         <div class="mb-3">
-          <h1 class="fw-bold">{{ $news['title'] }}</h1>
-          <small class="text-muted">1 hari lalu · <span class="text-primary">{{ $news['author'] }}</span></small>
+          <h1 class="fw-bold">{{ $news['judul'] }}</h1>
+          <small class="text-muted"><span class="text-primary">{{ $news['penulis'] }}</span></small>
           <div class="float-end">
             <a href="#" class="text-dark">Bagikan <i class="bi bi-share-fill mx-2"></i></a>
           </div>
         </div>
 
         {{-- Gambar utama --}}
-        @if (!empty($news['urlToImage']))
-          <img src="{{ $news['urlToImage'] }}" alt="Gambar Berita" class="img-fluid rounded mb-4">
+        @if (!empty($news['gambar']))
+          <img
+            src="https://lh3.googleusercontent.com/d/{{ $news['gambar'] ?? '' }}"
+            alt="Gambar Berita Utama"
+            class="main-news"
+        >
         @endif
 
         {{-- Konten --}}
-        <p class="fs-5" style="text-align: justify;">
-          {{ $news['content'] ?? 'Tidak ada deskripsi yang tersedia untuk berita ini.' }}
-        </p>
-
-        {{-- Artikel terkait --}}
-        {{-- <h4 class="mt-5">Artikel terkait</h4>
-        <div class="row row-cols-1 row-cols-md-4 g-3">
-          @foreach ($relatedNews as $item)
-          <div class="col">
-            <div class="card h-100">
-              <img src="{{ $item['urlToImage'] }}" class="card-img-top" alt="Gambar Artikel">
-              <div class="card-body">
-                <span class="badge bg-primary">{{ ucfirst($item['category'] ?? 'Umum') }}</span>
-                <a href="{{ route('detail', ['title' => urlencode($item['title'])]) }}" class="card-title d-block mt-2 text-decoration-none text-dark fw-semibold">
-                  {{ Str::limit($item['title'], 60) }}
-                </a>
-              </div>
-            </div>
-          </div>
-          @endforeach
-        </div> --}}
+        <div class="fs-5 mt-5" style="text-align: justify;">
+          {!! $news['deskripsi'] !!}
+        </div>
 
         {{-- Berita lainnya --}}
-        <h4 class="mt-5">Berita lainnya</h4>
+        {{-- <h4 class="mt-5">Berita lainnya</h4>
         <div class="row row-cols-1 row-cols-md-4 g-3">
         @foreach ($otherNews as $item)
         <div class="col">
             <div class="card news-card h-100">
-            <img src="{{ $item['urlToImage'] }}" class="card-img-top" alt="News Image">
+                <img
+                src="https://lh3.googleusercontent.com/d/{{ $headline['gambar'] ?? '' }}"
+                alt="Gambar Berita Utama"
+                class="main-news"
+                >
             <div class="card-body">
-                <span class="badge-news">{{ ucfirst($item['category'] ?? 'Umum') }}</span>
-                <a href="{{ route('detail', ['title' => urlencode($item['title'])]) }}" class="card-title d-block mt-2 text-decoration-none text-dark fw-semibold">
-                {{ Str::limit($item['title'], 60) }}
+                <a href="{{ route('detail', ['judul' => urlencode($item['judul'])]) }}" class="card-title d-block mt-2 text-decoration-none text-dark fw-semibold">
+                {{ Str::limit($item['judul'], 60) }}
                 </a>
             </div>
             </div>
         </div>
         @endforeach
-        </div>
+        </div> --}}
 
 
         {{-- Komentar --}}
