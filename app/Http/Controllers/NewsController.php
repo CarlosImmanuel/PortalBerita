@@ -56,7 +56,7 @@ class NewsController extends Controller
 
     public function show($id)
     {
-        // Langkah 1: Login untuk dapatkan API Key
+        // Step 1: Login untuk dapatkan API Key
         $loginResponse = Http::post('https://winnicode.com/api/login', [
             'email' => 'dummy@dummy.com',
             'password' => 'dummy'
@@ -72,19 +72,20 @@ class NewsController extends Controller
             return abort(500, 'API Key tidak ditemukan');
         }
 
-        // Langkah 2: Ambil semua berita
+        // Step 2: Ambil semua berita
         $response = Http::withToken($apiKey)->get('https://winnicode.com/api/publikasi-berita');
         $newsList = $response->successful() ? $response->json() : [];
 
-        // Langkah 3: Cari berita berdasarkan ID
+        // Step 3: Cari berita berdasarkan ID
         $selectedNews = collect($newsList)->firstWhere('id', $id);
 
         if (!$selectedNews) {
             return abort(404, 'Berita tidak ditemukan');
         }
 
-        // Ambil 4 berita lain (selain yang dibuka)
+        // Step 4: Ambil berita lain dari kategori yang sama, tapi beda ID
         $otherNews = collect($newsList)
+            ->where('kategori', $selectedNews['kategori'] ?? null)
             ->where('id', '!=', $id)
             ->take(4)
             ->values()

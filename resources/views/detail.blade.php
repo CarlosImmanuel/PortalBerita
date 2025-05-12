@@ -20,64 +20,81 @@
     <div class="container mt-5">
         {{-- Judul dan Metadata --}}
         <div class="mb-3">
-          <h1 class="fw-bold">{{ $news['judul'] }}</h1>
-          <small class="text-muted"><span class="text-primary">{{ $news['penulis'] }}</span></small>
-          <div class="float-end">
-            <a href="#" class="text-dark">Bagikan <i class="bi bi-share-fill mx-2"></i></a>
-          </div>
+            <h1 class="fw-bold">{{ $news['judul'] }}</h1>
+            <small class="text-muted">
+                <span class="text-primary">{{ $news['penulis'] }}</span>
+            </small>
+            <div class="float-end">
+                <a href="#" class="text-dark">Bagikan <i class="bi bi-share-fill mx-2"></i></a>
+            </div>
         </div>
 
         {{-- Gambar utama --}}
         @if (!empty($news['gambar']))
-          <img
-            src="https://lh3.googleusercontent.com/d/{{ $news['gambar'] ?? '' }}"
-            alt="Gambar Berita Utama"
-            class="main-news"
-        >
+            <img
+                src="https://lh3.googleusercontent.com/d/{{ $news['gambar'] }}"
+                alt="Gambar Berita Utama"
+                class="main-news"
+            >
         @endif
 
         {{-- Konten --}}
         <div class="fs-5 mt-5" style="text-align: justify;">
-          {!! $news['deskripsi'] !!}
+            {!! $news['deskripsi'] !!}
         </div>
 
         {{-- Berita lainnya --}}
-        {{-- <h4 class="mt-5">Berita lainnya</h4>
-        <div class="row row-cols-1 row-cols-md-4 g-3">
-        @foreach ($otherNews as $item)
-        <div class="col">
-            <div class="card news-card h-100">
-                <img
-                src="https://lh3.googleusercontent.com/d/{{ $headline['gambar'] ?? '' }}"
-                alt="Gambar Berita Utama"
-                class="main-news"
-                >
-            <div class="card-body">
-                <a href="{{ route('detail', ['judul' => urlencode($item['judul'])]) }}" class="card-title d-block mt-2 text-decoration-none text-dark fw-semibold">
-                {{ Str::limit($item['judul'], 60) }}
-                </a>
+        <h4 class="mt-5">Berita lainnya</h4>
+        @if (count($otherNews) > 0)
+            <div class="row row-cols-1 row-cols-md-4 g-3">
+                @foreach ($otherNews as $item)
+                <div class="col">
+                    <div class="card news-card h-100">
+                        @if (!empty($item['gambar']))
+                            <img
+                                src="https://lh3.googleusercontent.com/d/{{ $item['gambar'] }}"
+                                alt="Gambar Berita"
+                                class="main-news"
+                            >
+                        @else
+                            <img
+                                src="https://via.placeholder.com/600x400?text=No+Image"
+                                alt="No Image"
+                                class="main-news"
+                            >
+                        @endif
+                        <div class="card-body">
+                            <a href="{{ route('detail', ['id' => $item['id']]) }}" class="card-title d-block mt-2 text-decoration-none text-dark fw-semibold">
+                                {{ Str::limit($item['judul'], 60) }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
             </div>
+        @else
+            <div class="alert alert-warning mt-3">
+                <i class="bi bi-exclamation-circle me-2"></i>
+                Berita pada kategori ini sudah tidak ada lagi.
             </div>
-        </div>
-        @endforeach
-        </div> --}}
+        @endif
 
 
         {{-- Komentar --}}
         <div class="mt-5">
-          <h5>Kirim Komentar</h5>
-          <form {{-- action="{{ route('comment.store') }}" --}} method="POST">
-            @csrf
-            <div class="mb-3">
-              <textarea name="content" rows="4" class="form-control" maxlength="1000" placeholder="Tuliskan komentar anda...(Max 1000 karakter)"></textarea>
+            <h5>Kirim Komentar</h5>
+            <form {{-- action="{{ route('comment.store') }}" --}} method="POST">
+                @csrf
+                <div class="mb-3">
+                    <textarea name="content" rows="4" class="form-control" maxlength="1000" placeholder="Tuliskan komentar anda...(Max 1000 karakter)"></textarea>
+                </div>
+                <button class="btn btn-primary">Send</button>
+            </form>
+            <div class="mt-3">
+                <strong>0 komentar</strong>
             </div>
-            <button class="btn btn-primary">Send</button>
-          </form>
-          <div class="mt-3">
-            <strong>0 komentar</strong>
-          </div>
         </div>
-      </div>
+    </div>
 
     {{-- Footer --}}
     @include('layouts.footer')
