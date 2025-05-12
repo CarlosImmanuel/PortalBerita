@@ -13,7 +13,7 @@
     <title>Detail</title>
 </head>
 <body>
-    {{-- Header --}}
+    {{-- Bagian Header --}}
     @include('layouts.header')
 
     {{-- Main Content --}}
