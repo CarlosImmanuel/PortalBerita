@@ -1,3 +1,7 @@
+@php
+    use Carbon\Carbon;
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +26,8 @@
         <div class="mb-3">
             <h1 class="fw-bold">{{ $news['judul'] }}</h1>
             <small class="text-muted">
-                <span class="text-primary">{{ $news['penulis'] }}</span>
+                {{ Carbon::parse($news['created_at'])->locale('id')->diffForHumans() }} <br>
+                <span style="font-size:15px; font-weight: bold;">{{ $news['penulis'] }}</span>
             </small>
             <div class="float-end">
                 <a href="#" class="text-dark">Bagikan <i class="bi bi-share-fill mx-2"></i></a>

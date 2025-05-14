@@ -40,16 +40,18 @@
     <div class="news-title">Berita utama hari ini</div>
 
     @if ($headline)
+        <a href="{{ route('detail', ['id' => $headline['id']]) }}" class="text-decoration-none text-dark">
         <div class="position-relative top-news">
-        <img
+            <img
             src="https://lh3.googleusercontent.com/d/{{ $headline['gambar'] ?? '' }}"
             alt="Gambar Berita Utama"
             class="main-news"
-        >
-        <div class="headline-text">
+            >
+            <div class="headline-text">
             {{ $headline['judul'] }}
+            </div>
         </div>
-        </div>
+        </a>
     @endif
     </div>
 
