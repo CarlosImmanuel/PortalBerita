@@ -11,6 +11,21 @@
 <body>
     <div class="wrapper">
         <div class="modal-container">
+
+        @if(session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        @if(session()->has('loginError'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('loginError') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
             <div class="modal-header">
                 <h2 class="modal-title">Welcome to InfoNet!</h2>
             </div>
@@ -19,7 +34,7 @@
                 <p>Log in to your account to read the latest news and also discuss in the comments column!</p>
 
                 {{-- action="{{ route('login') }}"DISAMPING  METHOD--}}
-                <form method="POST">
+                <form action="/login" method="POST">
                     @csrf
 
                     <div class="form-group">
@@ -27,7 +42,7 @@
                             name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
                         @error('email')
                             <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                                <strong style="color: red; font-size: 12px;">{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>

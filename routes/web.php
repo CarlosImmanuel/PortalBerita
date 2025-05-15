@@ -16,10 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/login', [LoginController::class, 'login'])->name('login');
-// Route::redirect('/', '/login');
+Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
+Route::redirect('/', '/news');
 
-// Route::get('/register', [RegisterController::class, 'register'])->name('register');
+Route::get('/register', [RegisterController::class, 'register'])->name('register')->middleware('guest');
+Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/', [NewsController::class, 'index']);
+Route::get('/news', [NewsController::class, 'index']);
+Route::get('/load-news/{kategori}', [NewsController::class, 'loadMoreNews']);
+
+
 Route::get('/detail/{id}', [NewsController::class, 'show'])->name('detail');

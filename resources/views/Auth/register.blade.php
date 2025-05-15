@@ -16,7 +16,7 @@
                     <h1>Welcome to Nama!</h1>
                     <p>Create an account to read the latest news and also discuss in the comments column!</p>
 
-                    <form method="POST" action="#">
+                    <form method="POST" action="/register">
                         @csrf
                         <button type="button" class="btn btn-primary">
                             <span class="google-icon">
@@ -42,11 +42,23 @@
                         {{-- action="{{ route('register') }}" DISAMPING METHOD --}}
                         @csrf
                         <div class="form-group">
-                            <input type="email" name="email" placeholder="Email" required>
+                            <input type="email" name="email" placeholder="Email" required value="{{ old('email') }}" class="from-control @error('email' ) is-invalid @enderror">
+
+                            @error('email')
+                                <div class="invalid-feedback" >
+                                    <strong style="color: red; font-size: 12px;">{{ $message }}</strong>
+                                </div>
+                            @enderror
+
                         </div>
 
                         <div class="form-group">
-                            <input type="password" name="password" placeholder="Password" required>
+                            <input type="password" name="password" placeholder="Password" required @error( 'password' ) is-invalid @enderror>
+                            @error('password')
+                                <div class="invalid-feedback" >
+                                    <strong style="color: red; font-size: 12px;">{{ $message }}</strong>
+                                </div>
+                            @enderror
                         </div>
 
                         <button type="submit" class="btn btn-create">Create Account</button>
