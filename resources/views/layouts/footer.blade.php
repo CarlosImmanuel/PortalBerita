@@ -4,9 +4,9 @@
             <img src="{{ asset('images/Logo.png') }}" alt="InfoNet Logo">
         </div>
         <div class="social-icons">
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://www.instagram.com/infonet1212?igsh=MTF6eGFxMm1vbGs2Zg=="><i class="fa-brands fa-instagram"></i></a>
+            <a href="http://x.com/infonet1212"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"></i></a>
         </div>
     </div>
     <p class="copyright">
