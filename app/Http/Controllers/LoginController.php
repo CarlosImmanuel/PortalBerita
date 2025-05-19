@@ -7,8 +7,14 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function login() {
-        return view('Auth/login');
+    public function login(Request $request) {
+        // return view('Auth/login');
+
+        if ($request->has('_token')) {
+        return redirect()->route('login'); 
+    }
+
+    return view('Auth.login');
     }
 
     public function authenticate(Request $request)
