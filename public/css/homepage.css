@@ -28,6 +28,36 @@
     border-radius: 8px;
   }
 
+  .top-news .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4); /* warna gelap semi-transparan */
+    opacity: 0; /* awalnya ga keliatan */
+    transition: opacity 0.3s ease;
+    border-radius: 8px;
+    z-index: 1;
+  }
+
+  .top-news:hover .overlay {
+    opacity: 1; /* pas hover, baru muncul gelapnya */
+ }
+
+ .news-card:hover .main-news,
+ .news-card:hover .card-text,
+ .news-card:hover .badge-news {
+  transform: scale(1.05);
+ }
+
+ .main-news,
+ .card-text,
+ .badge-news {
+  transition: transform 0.3s ease;
+  will-change: transform;
+ }
+
   .headline-text {
     position: absolute;
     bottom: 15px;
@@ -38,6 +68,7 @@
     padding: 10px 15px;
     border-radius: 8px;
     text-align: center;
+    z-index: 2;
 }
 
   .navbar-brand img {
@@ -88,7 +119,7 @@
     padding: 6px 12px;
     font-size: 0.85rem;
     border-radius: 5px;
-    z-index: 1;
+    z-index: 1
   }
 
   .card-text {

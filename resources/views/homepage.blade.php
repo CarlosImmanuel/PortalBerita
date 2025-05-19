@@ -37,23 +37,24 @@
 
       <!-- Headline -->
       <div class="col-md-10">
-    <div class="news-title">Berita utama hari ini</div>
+        <div class="news-title">Berita utama hari ini</div>
 
-    @if ($headline)
-        <a href="{{ route('detail', ['id' => $headline['id']]) }}" class="text-decoration-none text-dark">
-        <div class="position-relative top-news">
-            <img
-            src="https://lh3.googleusercontent.com/d/{{ $headline['gambar'] ?? '' }}"
-            alt="Gambar Berita Utama"
-            class="main-news"
-            >
-            <div class="headline-text">
-            {{ $headline['judul'] }}
+        @if ($headline)
+            <a href="{{ route('detail', ['id' => $headline['id']]) }}" class="text-decoration-none text-dark">
+            <div class="position-relative top-news">
+                <img
+                src="https://lh3.googleusercontent.com/d/{{ $headline['gambar'] ?? '' }}"
+                alt="Gambar Berita Utama"
+                class="main-news"
+                >
+                <div class="overlay"></div>
+                    <div class="headline-text">
+                    {{ $headline['judul'] }}
+                    </div>
             </div>
+            </a>
+        @endif
         </div>
-        </a>
-    @endif
-    </div>
 
     @foreach ($groupedNews as $kategori => $beritaList)
         <div class="mt-5">
@@ -63,19 +64,21 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
             @foreach ($beritaList as $item)
             <div class="col">
-                <div class="card news-card h-100">
-                <img
-                    src="https://lh3.googleusercontent.com/d/{{ $item['gambar'] ?? '' }}"
-                    alt="Gambar Berita"
-                    class="main-news"
-                >
-                <div class="card-body">
-                    <span class="badge-news">{{ $item['kategori'] }}</span>
-                    <a href="{{ route('detail', ['id' => $item['id']]) }}" class="card-text d-block text-decoration-none text-dark">
-                    {{ $item['judul'] }}
-                    </a>
-                </div>
-                </div>
+                <a href="{{ route('detail', ['id' => $item['id']]) }}" class="text-decoration-none text-dark">
+                    <div class="card news-card h-100">
+                        <img
+                            src="https://lh3.googleusercontent.com/d/{{ $item['gambar'] ?? '' }}"
+                            alt="Gambar Berita"
+                            class="main-news"
+                        >
+                        <div class="card-body">
+                            <span class="badge-news">{{ $item['kategori'] }}</span>
+                            <div class="card-text">
+                                {{ $item['judul'] }}
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
             @endforeach
         </div>
