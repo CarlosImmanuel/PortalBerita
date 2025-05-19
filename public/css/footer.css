@@ -24,8 +24,9 @@
 }
 
 .social-icons a:hover i {
-    transform: scale(1.2);
     color: #555;
+    transform: scale(1.2);
+    transition: all 0.3s ease;
 }
 
 .copyright {

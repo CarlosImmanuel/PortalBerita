@@ -10,6 +10,7 @@
     transform: scale(1.05);
     color: white;
     background-color: darkblue;
+    transition: all 0.3s ease;
 }
 
 .regis {
@@ -19,4 +20,22 @@
 .regis:hover {
     transform: scale(1.05);
     color: black;
+    transform: scale(1.05);
+    transition: all 0.3s ease;
 }
+
+.navbar-brand img {
+  width: 30px;
+  height: 30px;
+}
+
+.navbar {
+  position: relative;
+}
+
+.navbar .mx-auto img {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
