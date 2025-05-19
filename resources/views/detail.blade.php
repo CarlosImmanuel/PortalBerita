@@ -53,29 +53,32 @@
         @if (count($otherNews) > 0)
             <div class="row row-cols-1 row-cols-md-4 g-3">
                 @foreach ($otherNews as $item)
-                <div class="col">
-                    <div class="card news-card h-100">
-                        @if (!empty($item['gambar']))
-                            <img
-                                src="https://lh3.googleusercontent.com/d/{{ $item['gambar'] }}"
-                                alt="Gambar Berita"
-                                class="main-news"
-                            >
-                        @else
-                            <img
-                                src="https://via.placeholder.com/600x400?text=No+Image"
-                                alt="No Image"
-                                class="main-news"
-                            >
-                        @endif
-                        <div class="card-body">
-                            <a href="{{ route('detail', ['id' => $item['id']]) }}" class="card-title d-block mt-2 text-decoration-none text-dark fw-semibold">
-                                {{ Str::limit($item['judul'], 60) }}
-                            </a>
-                        </div>
+<div class="col">
+    <div class="card news-card h-100 position-relative">
+                @if (!empty($item['gambar']))
+                    <img
+                        src="https://lh3.googleusercontent.com/d/{{ $item['gambar'] }}"
+                        alt="Gambar Berita"
+                        class="main-news"
+                    >
+                @else
+                    <img
+                        src="https://via.placeholder.com/600x400?text=No+Image"
+                        alt="No Image"
+                        class="main-news"
+                    >
+                @endif
+                <div class="card-body">
+                    <div class="card-text">
+                        {{ Str::limit($item['judul'], 60) }}
                     </div>
                 </div>
-                @endforeach
+
+                {{-- Bikin overlay link full card clickable --}}
+                <a href="{{ route('detail', ['id' => $item['id']]) }}" class="stretched-link"></a>
+            </div>
+        </div>
+        @endforeach
             </div>
         @else
             <div class="alert alert-warning mt-3">
