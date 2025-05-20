@@ -2,6 +2,13 @@ html {
     scroll-behavior: smooth;
 }
 
+.animasi {
+    animation: listAnimation linear forwards;
+    animation-timeline: view();
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
 .sidebar {
     background-color: #f8f9fa;
     padding: 20px;
@@ -102,10 +109,6 @@ html {
     font-weight: bold;
     font-size: 1.3rem;
     margin-bottom: 20px;
-    animation: listAnimation linear forwards;
-    animation-timeline: view();
-    animation-duration: 1s;
-    animation-fill-mode: both;
     scroll-margin-top: 200px;
 }
 
@@ -129,10 +132,6 @@ html {
 .news-card {
     border: none;
     box-shadow: none;
-    animation: listAnimation linear forwards;
-    animation-timeline: view();
-    animation-duration: 1s;
-    animation-fill-mode: both;
 }
 
 .badge-news {

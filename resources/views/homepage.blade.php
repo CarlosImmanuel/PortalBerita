@@ -57,7 +57,7 @@
         </div>
 
     @foreach ($groupedNews as $kategori => $beritaList)
-        <div class="mt-5">
+        <div class="mt-5 animasi">
         <h5 class="section-title" id="kategori-{{ \Illuminate\Support\Str::slug($kategori, '-') }}">
             {{ $kategori }}
         </h5>
