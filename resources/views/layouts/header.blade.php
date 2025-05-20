@@ -24,8 +24,8 @@
           Welcome, {{ auth()->user()->email }}
         </a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Dashboard</a></li>
-          <li><hr class="dropdown-divider"></li>
+          {{-- <li><a class="dropdown-item" href="#">Dashboard</a></li> --}}
+          {{-- <li><hr class="dropdown-divider"></li> --}}
           <li>
             <form action="/logout" method="POST">
               @csrf

@@ -13,16 +13,16 @@
         <div class="modal-container">
 
         @if(session()->has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert-custom alert-success">
                 {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button class="alert-close" onclick="this.parentElement.style.display='none';">&times;</button>
             </div>
         @endif
 
         @if(session()->has('loginError'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="alert-custom alert-error">
                 {{ session('loginError') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button class="alert-close" onclick="this.parentElement.style.display='none';">&times;</button>
             </div>
         @endif
 
