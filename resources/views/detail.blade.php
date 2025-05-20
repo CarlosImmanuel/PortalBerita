@@ -49,43 +49,45 @@
         </div>
 
         {{-- Berita lainnya --}}
-        <h4 class="mt-5">Berita lainnya</h4>
-        @if (count($otherNews) > 0)
-            <div class="row row-cols-1 row-cols-md-4 g-3">
-                @foreach ($otherNews as $item)
-<div class="col">
-    <div class="card news-card h-100 position-relative">
-                @if (!empty($item['gambar']))
-                    <img
-                        src="https://lh3.googleusercontent.com/d/{{ $item['gambar'] }}"
-                        alt="Gambar Berita"
-                        class="main-news"
-                    >
-                @else
-                    <img
-                        src="https://via.placeholder.com/600x400?text=No+Image"
-                        alt="No Image"
-                        class="main-news"
-                    >
-                @endif
-                <div class="card-body">
-                    <div class="card-text">
-                        {{ Str::limit($item['judul'], 60) }}
-                    </div>
-                </div>
+        <div class="animasi">
+            <h4 class="mt-5">Berita lainnya</h4>
+            @if (count($otherNews) > 0)
+                <div class="row row-cols-1 row-cols-md-4 g-3">
+                    @foreach ($otherNews as $item)
+            <div class="col">
+                <div class="card news-card h-100 position-relative">
+                            @if (!empty($item['gambar']))
+                                <img
+                                    src="https://lh3.googleusercontent.com/d/{{ $item['gambar'] }}"
+                                    alt="Gambar Berita"
+                                    class="main-news"
+                                >
+                            @else
+                                <img
+                                    src="https://via.placeholder.com/600x400?text=No+Image"
+                                    alt="No Image"
+                                    class="main-news"
+                                >
+                            @endif
+                            <div class="card-body">
+                                <div class="card-text">
+                                    {{ Str::limit($item['judul'], 60) }}
+                                </div>
+                            </div>
 
-                {{-- Bikin overlay link full card clickable --}}
-                <a href="{{ route('detail', ['id' => $item['id']]) }}" class="stretched-link"></a>
-            </div>
+                            {{-- Bikin overlay link full card clickable --}}
+                            <a href="{{ route('detail', ['id' => $item['id']]) }}" class="stretched-link"></a>
+                        </div>
+                    </div>
+                    @endforeach
+                        </div>
+                    @else
+                        <div class="alert alert-warning mt-3">
+                            <i class="bi bi-exclamation-circle me-2"></i>
+                            Berita pada kategori ini sudah tidak ada lagi.
+                        </div>
+                    @endif
         </div>
-        @endforeach
-            </div>
-        @else
-            <div class="alert alert-warning mt-3">
-                <i class="bi bi-exclamation-circle me-2"></i>
-                Berita pada kategori ini sudah tidak ada lagi.
-            </div>
-        @endif
 
 
         {{-- Komentar --}}
