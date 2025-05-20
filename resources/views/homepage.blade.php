@@ -24,7 +24,7 @@
         <div class="kategori-scroll" style="max-height: 297px; overflow-y: auto;">
             <ul class="list-unstyled">
             @foreach ($groupedNews->keys() as $kategori)
-                <li class="mt-3 kategori-item">
+                <li class="mt-1 kategori-item">
                 <a href="#kategori-{{ \Illuminate\Support\Str::slug($kategori, '-') }}" class="text-decoration-none text-dark">
                     {{ $kategori }}
                 </a>

@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 .sidebar {
     background-color: #f8f9fa;
     padding: 20px;
@@ -102,6 +106,7 @@
     animation-timeline: view();
     animation-duration: 1s;
     animation-fill-mode: both;
+    scroll-margin-top: 200px;
 }
 
 .news-card img {
@@ -148,9 +153,8 @@
     padding: 10px;
     border-radius: 8px;
     margin-bottom: 5px;
-    animation: listAnimation linear forwards;
+    /* animation: listAnimation linear forwards; */
     animation-timeline: view();
-    /* Optional: tambahin hover */
     transition: background-color 0.3s;
   }
 
