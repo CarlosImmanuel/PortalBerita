@@ -25,7 +25,7 @@ html {
 
 .sidebar .kategori-scroll a:hover {
   background-color: #f0f0f0;
-  transform: translateY(-4px); /* animasi geser dikit ke kanan */
+  transform: translateY(-4px);
 }
 
   .sidebar ul {
@@ -58,15 +58,15 @@ html {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.4); /* warna gelap semi-transparan */
-    opacity: 0; /* awalnya ga keliatan */
+    background-color: rgba(0,0,0,0.4);
+    opacity: 0;
     transition: opacity 0.3s ease;
     border-radius: 8px;
     z-index: 1;
   }
 
   .top-news:hover .overlay {
-    opacity: 1; /* pas hover, baru muncul gelapnya */
+    opacity: 1;
  }
 
  .news-card:hover .main-news,
@@ -138,8 +138,8 @@ html {
     position: absolute;
     top: 0;
     right: 0;
-    margin: 0;         /* sama kayak m-0 */
-    background-color: #0d6efd; /* sama kayak bg-primary */
+    margin: 0;
+    background-color: #0d6efd;
     color: white;
     padding: 6px 12px;
     font-size: 0.85rem;
@@ -148,11 +148,10 @@ html {
   }
 
   .kategori-item {
-    background-color: #f8f9fa; /* biar keliatan */
+    background-color: #f8f9fa;
     padding: 10px;
     border-radius: 8px;
     margin-bottom: 5px;
-    /* animation: listAnimation linear forwards; */
     animation-timeline: view();
     transition: background-color 0.3s;
   }
@@ -174,7 +173,6 @@ html {
   background-color: #555;
 }
 
-/* Buat animasi ala TikTok view scroll */
 @keyframes listAnimation {
   0% {
     opacity: 0;
@@ -192,4 +190,8 @@ html {
     opacity: 0;
     transform: scale(0.8);
   }
+}
+
+nav.navbar {
+    z-index: 1040;
 }

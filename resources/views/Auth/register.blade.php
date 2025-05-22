@@ -13,7 +13,7 @@
         <div class="modal-container">
             <div class="modal-content">
                 <div class="left-section">
-                    <h1>Welcome to Nama!</h1>
+                    <h1>Welcome to InfoNet!</h1>
                     <p>Create an account to read the latest news and also discuss in the comments column!</p>
 
                     <form method="POST" action="/register">

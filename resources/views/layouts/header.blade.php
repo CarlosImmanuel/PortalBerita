@@ -1,22 +1,18 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
-  {{-- Kiri: Logo + Brand --}}
+<nav class="navbar navbar-expand-lg navbar-light bg-light px-4 position-sticky top-0">
   <div class="d-flex align-items-center">
     <a class="navbar-brand d-flex align-items-center me-3" href="#">
       <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home Icon" class="me-2" style="width: 30px; height: 30px;">
     </a>
 
-    {{-- Search Bar --}}
     <form class="d-flex" role="search">
-      <input class="form-control" type="search" placeholder="Search..." aria-label="Search" style="width: 250px;">
+      <input class="form-control" id="searchInput" type="search" placeholder="Search..." aria-label="Search" style="width: 250px;">
     </form>
   </div>
 
-  {{-- Tengah: Logo gambar (misal logo kampus, misalnya ya) --}}
   <div class="d-flex align-items-center mx-auto footer-logo">
     <img src="{{ asset('images/Logo.png') }}" alt="InfoNet Logo">
   </div>
 
-  {{-- Kanan: Auth menu --}}
   <div class="d-flex align-items-center ms-auto">
     @auth
       <li style="list-style: none;" class="nav-item dropdown">
@@ -24,8 +20,6 @@
           Welcome, {{ auth()->user()->email }}
         </a>
         <ul class="dropdown-menu">
-          {{-- <li><a class="dropdown-item" href="#">Dashboard</a></li> --}}
-          {{-- <li><hr class="dropdown-divider"></li> --}}
           <li>
             <form action="/logout" method="POST">
               @csrf
