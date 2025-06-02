@@ -20,4 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/komentar', [KomentarController::class, 'store']);
+Route::put('/komentar/{id}', [KomentarController::class, 'update']);
+Route::delete('/komentar/{id}', [KomentarController::class, 'destroy']);
 Route::get('/komentar/{beritaId}', [KomentarController::class, 'getByBerita']);
