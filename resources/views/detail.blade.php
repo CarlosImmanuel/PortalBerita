@@ -93,20 +93,65 @@
         {{-- Komentar --}}
         <div class="mt-5">
             <h5>Kirim Komentar</h5>
-            <form {{-- action="{{ route('comment.store') }}" --}} method="POST">
+            <form action="{{ route('comment.store') }}" method="POST">
                 @csrf
+                <input type="hidden" name="berita_id" value="{{ $news['id'] }}">
                 <div class="mb-3">
-                    <textarea name="content" rows="4" class="form-control" maxlength="1000" placeholder="Tuliskan komentar anda...(Max 1000 karakter)"></textarea>
+                    <input type="text" name="nama" class="form-control" placeholder="Nama Anda" required>
                 </div>
-                <button class="btn btn-primary">Send</button>
+                <div class="mb-3">
+                    <textarea name="isi" rows="4" class="form-control" maxlength="1000" placeholder="Tuliskan komentar anda...(Max 1000 karakter)" required></textarea>
+                </div>
+                <button class="btn btn-primary">Kirim</button>
             </form>
-            <div class="mt-3">
-                <strong>0 komentar</strong>
+
+            <div class="mt-4">
+                <strong>{{ isset($komentars) ? $komentars->count() : 0 }} komentar</strong>
+                <ul class="list-group mt-2">
+                    @forelse ($komentars ?? [] as $komen)
+                        <li class="list-group-item">
+                            <strong>{{ $komen->nama }}</strong> <br>
+                            <small class="text-muted">{{ $komen->created_at->diffForHumans() }}</small>
+                            <p id="isi-komentar-{{ $komen->id }}">{{ $komen->isi }}</p>
+
+                            {{-- Tombol aksi --}}
+                            <button class="btn btn-sm btn-warning" onclick="showEditForm({{ $komen->id }}, '{{ addslashes($komen->isi) }}')">Edit</button>
+
+                            <form action="{{ route('comment.destroy', $komen->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin mau hapus komentar ini?')">Hapus</button>
+                            </form>
+
+                            {{-- Form edit (hidden dulu) --}}
+                            <form id="edit-form-{{ $komen->id }}" action="{{ route('comment.update', $komen->id) }}" method="POST" style="display:none;" class="mt-2">
+                                @csrf
+                                @method('PUT')
+                                <textarea name="isi" class="form-control" rows="3">{{ $komen->isi }}</textarea>
+                                <button class="btn btn-sm btn-success mt-2">Update</button>
+                                <button type="button" class="btn btn-sm btn-secondary mt-2" onclick="hideEditForm({{ $komen->id }})">Batal</button>
+                            </form>
+                        </li>
+                    @empty
+                        <li class="list-group-item">Belum ada komentar 😶</li>
+                    @endforelse
+                </ul>
             </div>
         </div>
     </div>
 
     {{-- Footer --}}
     @include('layouts.footer')
+    <script>
+        function showEditForm(id, isi) {
+        document.getElementById('edit-form-' + id).style.display = 'block';
+        document.getElementById('isi-komentar-' + id).style.display = 'none';
+    }
+
+    function hideEditForm(id) {
+        document.getElementById('edit-form-' + id).style.display = 'none';
+        document.getElementById('isi-komentar-' + id).style.display = 'block';
+    }
+    </script>
 </body>
 </html>
