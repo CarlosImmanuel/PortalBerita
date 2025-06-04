@@ -26,6 +26,13 @@
             </div>
         @endif
 
+        @if(session()->has('failed'))
+            <div class="alert-custom alert-error">
+                {{ session('failed') }}
+                <button class="alert-close" onclick="this.parentElement.style.display='none';">&times;</button>
+            </div>
+        @endif
+
             <div class="modal-header">
                 <h2 class="modal-title">Welcome to InfoNet!</h2>
             </div>

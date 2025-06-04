@@ -10,15 +10,14 @@ class KomentarController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'berita_id' => 'required',
-            'nama' => 'required|string',
-            'isi' => 'required|string',
+        'berita_id' => 'required|string',
+        'isi' => 'required|string',
         ]);
 
         Komentar::create([
-            'berita_id' => $request->berita_id,
-            'nama' => $request->nama,
-            'isi' => $request->isi,
+        'berita_id' => $request->berita_id,
+        'nama' => auth()->user()->username, 
+        'isi' => $request->isi,
         ]);
 
         return redirect()->back()->with('success', 'Komentar berhasil disimpan');
