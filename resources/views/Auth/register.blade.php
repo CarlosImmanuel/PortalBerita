@@ -16,9 +16,9 @@
                     <h1>Welcome to InfoNet!</h1>
                     <p>Create an account to read the latest news and also discuss in the comments column!</p>
 
-                    <form method="POST" action="/register">
+                    <form method="POST" action="/register" >
                         @csrf
-                        <button type="button" class="btn btn-primary">
+                        <a href="/auth-google-redirect" class="btn btn-primary" style="text-decoration: none;">
                             <span class="google-icon">
                                 <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
                                     <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
@@ -28,7 +28,7 @@
                                 </svg>
                             </span>
                             Continue with Google
-                        </button>
+                        </a>
                     </form>
                 </div>
 
@@ -41,15 +41,25 @@
                     <form method="POST">
                         {{-- action="{{ route('register') }}" DISAMPING METHOD --}}
                         @csrf
+
                         <div class="form-group">
-                            <input type="email" name="email" placeholder="Email" required value="{{ old('email') }}" class="from-control @error('email' ) is-invalid @enderror">
+                            <input type="text" name="username" placeholder="Username" required value="{{ old('username') }}" class="form-control @error('username') is-invalid @enderror">
+
+                            @error('username')
+                                <div class="invalid-feedback">
+                                    <strong style="color: red; font-size: 12px;">{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Email" required value="{{ old('email') }}" class="form-control @error('email' ) is-invalid @enderror">
 
                             @error('email')
                                 <div class="invalid-feedback" >
                                     <strong style="color: red; font-size: 12px;">{{ $message }}</strong>
                                 </div>
                             @enderror
-
                         </div>
 
                         <div class="form-group">

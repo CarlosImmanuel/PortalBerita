@@ -93,17 +93,36 @@
         {{-- Komentar --}}
         <div class="mt-5">
             <h5>Kirim Komentar</h5>
-            <form action="{{ route('comment.store') }}" method="POST">
-                @csrf
-                <input type="hidden" name="berita_id" value="{{ $news['id'] }}">
-                <div class="mb-3">
-                    <input type="text" name="nama" class="form-control" placeholder="Nama Anda" required>
+
+            @guest
+                <div class="alert alert-warning">
+                    Anda harus <a href="{{ route('login') }}">login</a> untuk mengirim komentar.
                 </div>
-                <div class="mb-3">
-                    <textarea name="isi" rows="4" class="form-control" maxlength="1000" placeholder="Tuliskan komentar anda...(Max 1000 karakter)" required></textarea>
+            @endguest
+
+            @auth
+            @if (auth()->user()->status === 'active')
+                <form action="{{ route('comment.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="berita_id" value="{{ $news['id'] }}">
+
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" value="{{ Auth::user()->username }}" disabled>
+                    </div>
+
+                    <div class="mb-3">
+                        <textarea name="isi" rows="4" class="form-control" maxlength="1000"
+                            placeholder="Tuliskan komentar anda...(Max 1000 karakter)" required></textarea>
+                    </div>
+                    <button class="btn btn-primary">Kirim</button>
+                </form>
+            @else
+                <div class="alert alert-danger">
+                    Akun Anda telah dibekukan dan tidak dapat mengirim komentar.
                 </div>
-                <button class="btn btn-primary">Kirim</button>
-            </form>
+            @endif
+            @endauth
 
             <div class="mt-4">
                 <strong>{{ isset($komentars) ? $komentars->count() : 0 }} komentar</strong>
@@ -114,23 +133,25 @@
                             <small class="text-muted">{{ $komen->created_at->diffForHumans() }}</small>
                             <p id="isi-komentar-{{ $komen->id }}">{{ $komen->isi }}</p>
 
-                            {{-- Tombol aksi --}}
-                            <button class="btn btn-sm btn-warning" onclick="showEditForm({{ $komen->id }}, '{{ addslashes($komen->isi) }}')">Edit</button>
+                            @auth
+                            @if ($komen->nama == auth()->user()->username)
+                                <button class="btn btn-sm btn-warning" onclick="showEditForm({{ $komen->id }}, '{{ addslashes($komen->isi) }}')">Edit</button>
 
-                            <form action="{{ route('comment.destroy', $komen->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin mau hapus komentar ini?')">Hapus</button>
-                            </form>
+                                <form action="{{ route('comment.destroy', $komen->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin mau hapus komentar ini?')">Hapus</button>
+                                </form>
 
-                            {{-- Form edit (hidden dulu) --}}
-                            <form id="edit-form-{{ $komen->id }}" action="{{ route('comment.update', $komen->id) }}" method="POST" style="display:none;" class="mt-2">
-                                @csrf
-                                @method('PUT')
-                                <textarea name="isi" class="form-control" rows="3">{{ $komen->isi }}</textarea>
-                                <button class="btn btn-sm btn-success mt-2">Update</button>
-                                <button type="button" class="btn btn-sm btn-secondary mt-2" onclick="hideEditForm({{ $komen->id }})">Batal</button>
-                            </form>
+                                <form id="edit-form-{{ $komen->id }}" action="{{ route('comment.update', $komen->id) }}" method="POST" style="display:none;" class="mt-2">
+                                    @csrf
+                                    @method('PUT')
+                                    <textarea name="isi" class="form-control" rows="3">{{ $komen->isi }}</textarea>
+                                    <button class="btn btn-sm btn-success mt-2">Update</button>
+                                    <button type="button" class="btn btn-sm btn-secondary mt-2" onclick="hideEditForm({{ $komen->id }})">Batal</button>
+                                </form>
+                            @endif
+                            @endauth
                         </li>
                     @empty
                         <li class="list-group-item">Belum ada komentar 😶</li>
@@ -142,6 +163,7 @@
 
     {{-- Footer --}}
     @include('layouts.footer')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/update.js') }}"></script>
 </body>
 </html>

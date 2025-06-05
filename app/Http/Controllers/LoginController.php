@@ -11,7 +11,7 @@ class LoginController extends Controller
         // return view('Auth/login');
 
         if ($request->has('_token')) {
-        return redirect()->route('login'); 
+        return redirect()->route('login');
     }
 
     return view('Auth.login');
@@ -26,6 +26,8 @@ class LoginController extends Controller
 
         if(Auth::attempt($credentials)) {
             $request->session()->regenerate();
+
+            if(Auth::user()->role == 'admin') return redirect('/dashboard');
 
             return redirect()->intended('/news');
         }
