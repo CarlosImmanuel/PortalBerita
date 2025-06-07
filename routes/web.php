@@ -60,3 +60,4 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::patch('/users/{id}/unban', [UserController::class, 'unban'])->name('users.unban');
 });
 
+Route::post('/komentar', [KomentarController::class, 'store'])->middleware('auth');

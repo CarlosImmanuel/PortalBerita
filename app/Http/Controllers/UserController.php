@@ -48,8 +48,8 @@ class UserController extends Controller
         ]);
 
         User::create([
-            'username' => $request->username,
-            'email' => $request->email,
+            'username' => strip_tags($request->username),
+            'email' => strip_tags($request->email),
             'role' => $request->role,
             'password' => bcrypt($request->password),
         ]);

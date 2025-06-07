@@ -16,8 +16,8 @@ class KomentarController extends Controller
 
         Komentar::create([
         'berita_id' => $request->berita_id,
-        'nama' => auth()->user()->username, 
-        'isi' => $request->isi,
+        'nama' => auth()->user()->username,
+        'isi' => strip_tags($request->isi),
         ]);
 
         return redirect()->back()->with('success', 'Komentar berhasil disimpan');
@@ -36,7 +36,7 @@ class KomentarController extends Controller
         ]);
 
         $komentar = Komentar::findOrFail($id);
-        $komentar->isi = $request->isi;
+        $komentar->isi = strip_tags($request->isi);
         $komentar->save();
 
         return redirect()->back()->with('success', 'Komentar berhasil diperbarui');
