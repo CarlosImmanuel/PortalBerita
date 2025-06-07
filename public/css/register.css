@@ -130,7 +130,8 @@ p {
 }
 
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="text"] {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -162,8 +163,8 @@ input[type="password"] {
 }
 
 .google-icon {
-    display: inline-block;
-    vertical-align: middle;
+    width: 20px;
+    height: 20px;
     margin-right: 8px;
 }
 
@@ -177,6 +178,23 @@ input[type="password"] {
     font-weight: bold;
     /* text-decoration: none; */
 }
+
+.btn-google {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* jarak antara icon dan teks */
+    box-sizing: border-box;
+    color: #000;
+}
+
 
 @media (max-width: 768px) {
     .modal-content {
