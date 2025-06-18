@@ -14,7 +14,7 @@
             <thead class="table-dark">
                 <tr>
                     <th>#</th>
-                    <th>ID Berita</th>
+                    <th>Judul Berita</th>
                     <th>Nama User</th>
                     <th>Isi Komentar</th>
                     <th>Tanggal</th>
@@ -25,7 +25,7 @@
                 @forelse ($comments as $index => $comment)
                     <tr>
                         <td>{{ $index + 1 }}</td>
-                        <td>{{ $comment->berita_id }}</td>
+                        <td>{{ $comment->judul_berita }}</td>
                         <td>{{ $comment->nama ?? 'User tidak ditemukan' }}</td>
                         <td>{{ $comment->isi }}</td>
                         <td>{{ $comment->created_at->format('d-m-Y H:i') }}</td>

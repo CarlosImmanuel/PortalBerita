@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Komentar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class CommentController extends Controller
 {
@@ -12,8 +13,36 @@ class CommentController extends Controller
      */
     public function index()
     {
-        // Ambil komentar beserta user (kalau ada relasi user)
+        // Ambil semua komentar
         $comments = Komentar::orderBy('created_at', 'desc')->get();
+
+        // Login ke API untuk dapatkan token
+        $loginResponse = Http::post('https://winnicode.com/api/login', [
+            'email' => 'dummy@dummy.com',
+            'password' => 'dummy'
+        ]);
+
+        $beritaMap = collect();
+
+        if ($loginResponse->successful()) {
+            $apiKey = $loginResponse->json()['api_key'] ?? null;
+
+            if ($apiKey) {
+                $newsResponse = Http::withToken($apiKey)->get('https://winnicode.com/api/publikasi-berita');
+
+                if ($newsResponse->successful()) {
+                    $beritaMap = collect($newsResponse->json())
+                        ->pluck('judul', 'id'); // key = id, value = judul
+                }
+            }
+        }
+
+        // Tambahin judul ke setiap komentar
+        $comments->transform(function ($comment) use ($beritaMap) {
+            $comment->judul_berita = $beritaMap[$comment->berita_id] ?? 'Judul tidak ditemukan';
+            return $comment;
+        });
+
         return view('dashboard.comments.index', compact('comments'));
     }
 
@@ -62,7 +91,7 @@ class CommentController extends Controller
      */
     public function destroy(string $id)
     {
-         $komentar = Komentar::findOrFail($id); // pastikan model Komentar sudah di-import
+        $komentar = Komentar::findOrFail($id);
         $komentar->delete();
 
         return redirect()->back()->with('success', 'Komentar berhasil dihapus');
