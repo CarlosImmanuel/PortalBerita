@@ -35,15 +35,11 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/auth-google-redirect', [RegisterController::class, 'google_redirect']);
 Route::get('/auth-google-callback', [RegisterController::class, 'google_callback']);
 
-// Route::get('/news', [NewsController::class, 'index']);
-// Route::get('/load-news/{kategori}', [NewsController::class, 'loadMoreNews']);
+Route::get('/news', [NewsController::class, 'index']);
+Route::get('/load-news/{kategori}', [NewsController::class, 'loadMoreNews']);
 
-Route::middleware('checkRoleExceptAdmin')->group(function () {
-    Route::get('/news', [NewsController::class, 'index']);
-    Route::get('/load-news/{kategori}', [NewsController::class, 'loadMoreNews']);
-    Route::get('/detail/{id}', [BeritaController::class, 'detail'])->name('detail');
-});
 
+Route::get('/detail/{id}', [BeritaController::class, 'detail'])->name('detail');
 
 // Route::get('/berita/{id}', [BeritaController::class, 'detail'])->name('berita.detail');
 
@@ -64,4 +60,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::patch('/users/{id}/unban', [UserController::class, 'unban'])->name('users.unban');
 });
 
-Route::post('/komentar', [KomentarController::class, 'store'])->middleware('auth');
+
+
+// Forgot password
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+
+Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');

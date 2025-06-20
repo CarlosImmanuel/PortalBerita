@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="forgot-password">
-                        <a href="">Forgot Password?</a>
+                        <a href="{{ route('password.request') }}">Forgot Password?</a>
                         {{-- "{{ route('password.request') }}" DIDALAM HREF--}}
                     </div>
 
