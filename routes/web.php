@@ -35,11 +35,15 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/auth-google-redirect', [RegisterController::class, 'google_redirect']);
 Route::get('/auth-google-callback', [RegisterController::class, 'google_callback']);
 
-Route::get('/news', [NewsController::class, 'index']);
-Route::get('/load-news/{kategori}', [NewsController::class, 'loadMoreNews']);
+// Route::get('/news', [NewsController::class, 'index']);
+// Route::get('/load-news/{kategori}', [NewsController::class, 'loadMoreNews']);
 
+Route::middleware('checkRoleExceptAdmin')->group(function () {
+    Route::get('/news', [NewsController::class, 'index']);
+    Route::get('/load-news/{kategori}', [NewsController::class, 'loadMoreNews']);
+    Route::get('/detail/{id}', [BeritaController::class, 'detail'])->name('detail');
+});
 
-Route::get('/detail/{id}', [BeritaController::class, 'detail'])->name('detail');
 
 // Route::get('/berita/{id}', [BeritaController::class, 'detail'])->name('berita.detail');
 
