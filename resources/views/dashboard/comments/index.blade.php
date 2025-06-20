@@ -13,23 +13,23 @@
         <table class="table table-bordered table-striped align-middle">
             <thead class="table-dark">
                 <tr>
-                    <th>#</th>
-                    <th>Judul Berita</th>
+                    <th class="text-center">No</th>
+                    <th class="text-center">Judul Berita</th>
                     <th>Nama User</th>
                     <th>Isi Komentar</th>
-                    <th>Tanggal</th>
-                    <th>Aksi</th>
+                    <th class="text-center">Tanggal</th>
+                    <th class="text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($comments as $index => $comment)
                     <tr>
-                        <td>{{ $index + 1 }}</td>
+                        <td class="text-center">{{ $index + 1 }}</td>
                         <td>{{ $comment->judul_berita }}</td>
                         <td>{{ $comment->nama ?? 'User tidak ditemukan' }}</td>
                         <td>{{ $comment->isi }}</td>
-                        <td>{{ $comment->created_at->format('d-m-Y H:i') }}</td>
-                        <td>
+                        <td class="text-center">{{ $comment->created_at->format('d-m-Y H:i') }}</td>
+                        <td class="text-center">
                             <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" style="display:inline-block;">
                                 @csrf
                                 @method('DELETE')
