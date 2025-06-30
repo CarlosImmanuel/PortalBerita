@@ -1,4 +1,4 @@
-@extends('dashboard.index')
+@extends('layouts.dashboard')
 
 @section('content')
     <h2>Tambah Akun Baru</h2>

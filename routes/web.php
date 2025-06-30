@@ -41,9 +41,8 @@ Route::get('/load-news/{kategori}', [NewsController::class, 'loadMoreNews']);
 Route::middleware('checkRoleExceptAdmin')->group (function () {
     Route::get('/news',[NewsController::class,'index']);
     Route::get('/load-news/{kategori}',[NewsController::class,'LoadMoreNews']);
-    Route::get('/detail/{id}', [BeritaController::class, 'detail'])->name('detail');
 });
-
+    Route::get('/detail/{id}', [BeritaController::class, 'detail'])->name('detail');
 // Route::get('/berita/{id}', [BeritaController::class, 'detail'])->name('berita.detail');
 
 Route::middleware(['auth'])->group(function () {
@@ -55,7 +54,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('users', UserController::class);
     Route::resource('comments', CommentController::class);
 

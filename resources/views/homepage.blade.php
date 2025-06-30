@@ -35,8 +35,8 @@
         </div>
 
 
-      <!-- Headline -->
-      <div class="col-md-10">
+    <!-- Headline -->
+    <div class="col-md-10">
         <div class="news-title">Berita utama hari ini</div>
 
         @if ($headline)

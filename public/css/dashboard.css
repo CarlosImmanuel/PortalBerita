@@ -1,0 +1,68 @@
+/* Styling khusus dashboard */
+
+.main-news {
+    max-height: 300px;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 6px;
+}
+
+.headline-text {
+    font-size: 1.25rem;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+.badge-news {
+    font-size: 0.8rem;
+    background-color: #6c757d;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.kategori-block {
+    margin-bottom: 2rem;
+}
+
+/* p */
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 100vh;
+    background-color: #343a40;
+    padding-top: 1rem;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.main-content {
+    margin-left: 220px;
+    height: 100vh;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+}
+
+@media (max-width: 991.98px) {
+    .sidebar {
+        position: fixed;
+        left: -220px;
+        transition: left 0.3s ease;
+    }
+
+    .sidebar.show {
+        left: 0;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}
