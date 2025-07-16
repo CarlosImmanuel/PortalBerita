@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 class RegisterController extends Controller
@@ -23,7 +24,19 @@ class RegisterController extends Controller
 
         ]);
 
-        User::create($validatedData);
+        // Hitung jumlah user di database
+        $userCount = User::count();
+
+        // Tentukan role berdasarkan jumlah user
+        $role = $userCount === 0 ? 'admin' : 'user';
+
+        // Simpan user dengan role dan password yang sudah di-hash
+        User::create([
+            'username' => $validatedData['username'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+            'role' => $role, // pastikan field 'role' ada di tabel users
+        ]);
 
         // $request->session()->flash('success', 'Registration successfull! Please login');
         session()->flash('success', 'Registration successful! Please login');
