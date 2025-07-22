@@ -10,7 +10,7 @@
     </div>
 
     <div class="d-flex align-items-center mx-auto footer-logo">
-        <img src="{{ asset('images/Logo.png') }}" alt="InfoNet Logo">
+        <img src="https://i.postimg.cc/BbWMj95G/image-1.png" alt="InfoNet Logo">
     </div>
 
     <div class="d-flex align-items-center ms-auto">
