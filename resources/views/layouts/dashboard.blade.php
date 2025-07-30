@@ -32,7 +32,7 @@
         <div class="d-flex flex-column p-3 h-100">
             <a href="{{ route('dashboard') }}" class="mb-4 text-center">Dashboard</a>
             <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
+                <li class="nav-item mb-2">
                     <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }} text-white">
                         Kelola Akun
                     </a>
