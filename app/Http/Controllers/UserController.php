@@ -54,7 +54,7 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        return redirect()->route('users.index')->with('success', 'Akun berhasil ditambahkan.');
+        return redirect()->route('users.index')->with('success', 'Account added successfully.');
     }
 
 
@@ -94,7 +94,7 @@ class UserController extends Controller
             'role' => $request->role,
         ]);
 
-        return redirect()->route('users.index')->with('success', 'Akun berhasil diperbarui.');
+        return redirect()->route('users.index')->with('success', 'Account updated successfully.');
     }
 
     /**
@@ -102,8 +102,8 @@ class UserController extends Controller
      */
     public function destroy(user $user)
     {
-        $user->forceDelete(); // menghapus total dari database
-        return redirect()->route('users.index')->with('success', 'Akun berhasil dihapus.');
+        $user->forceDelete();
+        return redirect()->route('users.index')->with('success', 'Account successfully deleted.');
     }
 
     public function ban($id)
@@ -112,7 +112,7 @@ class UserController extends Controller
         $user->status = 'banned';
         $user->save();
 
-        return back()->with('success', 'Akun berhasil dibekukan.');
+        return back()->with('success', 'Account has been successfully suspended.');
     }
 
     public function unban($id)
@@ -121,6 +121,6 @@ class UserController extends Controller
         $user->status = 'active';
         $user->save();
 
-        return back()->with('success', 'Akun berhasil diaktifkan kembali.');
+        return back()->with('success', 'Account has been successfully reactivated.');
     }
 }

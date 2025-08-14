@@ -57,9 +57,7 @@ class RegisterController extends Controller
         if(!$user){
             $user = User::create(['username' => $googleUser->name, 'email' => $googleUser->email, 'password' => bcrypt(uniqid()), 'status' => 'active' ]);
         }
-        // if($user && $user->status == 'banned'){
-        //     return redirect('/login')->with('failed', 'Akun anda telah dibekukan');
-        // }
+
         Auth::login($user);
         if($user->role == 'admin') return redirect('/Dashboard');
         return redirect('/news');
