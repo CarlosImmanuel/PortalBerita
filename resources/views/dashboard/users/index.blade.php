@@ -1,15 +1,11 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <h2>Kelola Akun</h2>
-
-    {{-- <div class="d-flex justify-content-end mb-3">
-        <a href="{{ route('users.create') }}" class="btn btn-primary">Tambah Akun</a>
-    </div> --}}
+    <h2>Manage Account</h2>
 
     <div class="d-flex justify-content-end mb-3">
     <a href="{{ route('users.create') }}" class="btn btn-outline-primary btn-sm">
-        <i class="fas fa-user-plus me-1"></i> Tambah Akun
+        <i class="fas fa-user-plus me-1"></i> Add Account
     </a>
     </div>
 
@@ -27,7 +23,7 @@
                     <th width="25%">Email</th>
                     <th width="15%">Role</th>
                     <th width="15%">Status</th>
-                    <th width="20%" class="text-center">Aksi</th>
+                    <th width="20%" class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -79,19 +75,19 @@
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="deleteUserModalLabel{{ $user->id }}">Konfirmasi Hapus</h5>
+                                            <h5 class="modal-title" id="deleteUserModalLabel{{ $user->id }}">Confirm Delete</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            Yakin ingin menghapus user <strong>{{ $user->username }}</strong> dengan email <strong>{{ $user->email }}</strong>?
+                                            Are you sure you want to delete the user <strong>{{ $user->username }}</strong> with email <strong>{{ $user->email }}</strong>?
                                         </div>
                                         <div class="modal-footer">
                                             <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                                <button type="submit" class="btn btn-danger">Delete</button>
                                             </form>
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                         </div>
                                     </div>
                                 </div>

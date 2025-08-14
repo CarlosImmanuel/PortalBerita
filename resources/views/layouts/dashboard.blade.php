@@ -26,22 +26,41 @@
         .sidebar .nav-link.active {
             background-color: #495057;
         }
+
+        .sidebar-title {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .sidebar-title h2 {
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
     <!-- Sidebar -->
     <div class="sidebar bg-dark text-white">
         <div class="d-flex flex-column p-3 h-100">
-            <a href="{{ route('dashboard') }}" class="mb-4 text-center">Dashboard</a>
+            <div class="sidebar-title text-center mb-4">
+                <img src="{{ asset('images/Logo.png') }}" alt="InfoNet Logo">
+                {{-- <h2 class="m-0 text-white" style="font-weight: 700; font-size: 1.8rem;">InfoNet</h2>
+                <hr class="border-light opacity-50 mt-2" /> --}}
+            </div>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
+                    <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }} text-white">
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }} text-white">
-                        Kelola Akun
+                        Account
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('comments.index') }}" class="nav-link {{ request()->routeIs('comments.*') ? 'active' : '' }} text-white">
-                        Kelola Komentar
+                        Comment
                     </a>
                 </li>
             </ul>

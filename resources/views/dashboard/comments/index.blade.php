@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="mb-4">
-        <h2>Kelola Komentar</h2>
+        <h2>Manage Comments</h2>
     </div>
 
     @if(session('success'))
@@ -14,11 +14,11 @@
         <thead class="border-bottom border-secondary">
             <tr>
                 <th width="5%" class="text-center">No</th>
-                <th width="25%">Judul Berita</th>
-                <th width="20%">User</th>
-                <th width="30%">Komentar</th>
-                <th width="10%" class="text-center">Tanggal</th>
-                <th width="10%" class="text-center">Aksi</th>
+                <th width="25%">News Title</th>
+                <th width="20%">Username</th>
+                <th width="30%">Comment</th>
+                <th width="10%" class="text-center">Date</th>
+                <th width="10%" class="text-center">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -31,7 +31,7 @@
                                 {{ $komen->judul_berita }}
                             @else
                                 <span class="text-danger fw-semibold">
-                                    <i class="fas fa-exclamation-circle me-1"></i> Berita tidak ditemukan
+                                    <i class="fas fa-exclamation-circle me-1"></i> News not found
                                 </span>
                             @endif
                     </td>
@@ -63,20 +63,20 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="deleteModalLabel{{ $komen->id }}">Konfirmasi Hapus</h5>
+                                        <h5 class="modal-title" id="deleteModalLabel{{ $komen->id }}">Confirm Delete</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        Yakin ingin menghapus komentar dari <strong>{{ $komen->nama ?? 'User tidak ditemukan' }}</strong>?<br>
+                                        Are you sure you want to delete the comment from <strong>{{ $komen->nama ?? 'User tidak ditemukan' }}</strong>?<br>
                                         <span class="text-muted small">"{{ Str::limit($komen->isi, 80) }}"</span>
                                     </div>
                                     <div class="modal-footer">
                                         <form action="{{ route('comments.destroy', $komen->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                            <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                     <td colspan="6" class="text-center py-5">
                         <div class="empty-state">
                             <i class="fas fa-comments fa-3x text-muted mb-3"></i>
-                            <p class="text-muted mb-0">Belum ada data komentar</p>
+                            <p class="text-muted mb-0">There is no comment data yet</p>
                         </div>
                     </td>
                 </tr>

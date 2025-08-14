@@ -94,6 +94,6 @@ class CommentController extends Controller
         $komentar = Komentar::findOrFail($id);
         $komentar->delete();
 
-        return redirect()->back()->with('success', 'Komentar berhasil dihapus');
+        return redirect()->back()->with('success', 'Comment successfully deleted');
     }
 }

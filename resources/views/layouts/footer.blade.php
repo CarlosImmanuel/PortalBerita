@@ -1,7 +1,7 @@
 <footer class="footer">
     <div class="footer-content">
         <div class="footer-logo">
-            <img src="https://i.postimg.cc/BbWMj95G/image-1.png" alt="InfoNet Logo">
+            <img src="{{ asset('images/Logo.png') }}" alt="InfoNet Logo">
         </div>
         <div class="social-icons">
             <a target="_blank" href="https://www.instagram.com/infonet1212?igsh=MTF6eGFxMm1vbGs2Zg=="><i class="fa-brands fa-instagram"></i></a>
@@ -10,6 +10,6 @@
         </div>
     </div>
     <p class="copyright">
-        Copyright 2025 IN. All rights reserved. The IN is not responsible for the content of external sites.
+        &copy; {{ date('Y') }} InfoNet. All rights reserved.
     </p>
 </footer>

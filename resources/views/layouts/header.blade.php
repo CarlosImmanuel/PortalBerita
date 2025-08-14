@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light px-4 position-sticky top-0">
     <div class="d-flex align-items-center">
-        <a class="navbar-brand d-flex align-items-center me-3" href="#">
+        <a class="navbar-brand d-flex align-items-center me-3" href="/news">
             <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home Icon" class="me-2" style="width: 30px; height: 30px;">
         </a>
 
@@ -10,7 +10,7 @@
     </div>
 
     <div class="d-flex align-items-center mx-auto footer-logo">
-        <img src="https://i.postimg.cc/BbWMj95G/image-1.png" alt="InfoNet Logo">
+        <img src="{{ asset('images/Logo.png') }}" alt="InfoNet Logo">
     </div>
 
     <div class="d-flex align-items-center ms-auto">

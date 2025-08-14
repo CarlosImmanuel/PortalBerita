@@ -30,7 +30,24 @@
                 <span style="font-size:15px; font-weight: bold;">{{ $news['penulis'] }}</span>
             </small>
             <div class="float-end">
-                <a href="#" class="text-dark">Bagikan <i class="bi bi-share-fill mx-2"></i></a>
+                    <div class="float-end">
+                        <div class="dropdown">
+                            <a class="text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Bagikan <i class="bi bi-share-fill mx-2"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->fullUrl()) }}" target="_blank">
+                                    <i class="bi bi-facebook me-1"></i> Facebook
+                                </a></li>
+                                <li><a class="dropdown-item" href="https://twitter.com/intent/tweet?url={{ urlencode(request()->fullUrl()) }}" target="_blank">
+                                    <i class="bi bi-twitter-x me-1"></i> Twitter
+                                </a></li>
+                                <li><a class="dropdown-item" href="https://api.whatsapp.com/send?text={{ urlencode(request()->fullUrl()) }}" target="_blank">
+                                    <i class="bi bi-whatsapp me-1"></i> WhatsApp
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
             </div>
         </div>
 
