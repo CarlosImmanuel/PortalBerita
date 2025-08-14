@@ -39,7 +39,7 @@ class CommentController extends Controller
 
         // Tambahin judul ke setiap komentar
         $comments->transform(function ($comment) use ($beritaMap) {
-            $comment->judul_berita = $beritaMap[$comment->berita_id] ?? 'Judul tidak ditemukan';
+            $comment->judul_berita = $beritaMap[$comment->berita_id] ?? null;
             return $comment;
         });
 

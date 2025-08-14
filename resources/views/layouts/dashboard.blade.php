@@ -11,6 +11,8 @@
     <!-- Dashboard CSS -->
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
         /* Optional tambahan styling sidebar link */
         .sidebar a {
@@ -46,7 +48,9 @@
             <hr />
             <form action="/logout" method="POST" class="mt-auto">
                 @csrf
-                <button type="submit" class="btn btn-danger w-100">Logout</button>
+                <button type="submit" class="btn btn-danger btn-outline-light btn-sm w-100">
+                    <i class="fas fa-sign-out-alt me-1"></i> Logout
+                </button>
             </form>
         </div>
     </div>
@@ -60,7 +64,7 @@
                 </button>
                 <div class="ms-auto">
                     <span class="navbar-text">
-                        Welcome {{ Auth::user()?->username }}
+                        Welcome, {{ Auth::user()?->username }}
                     </span>
                 </div>
             </div>

@@ -37,9 +37,15 @@
             </select>
         </div>
 
-        <div class="d-flex justify-content-between">
-            <a href="{{ route('users.index') }}" class="btn btn-secondary">Batal</a>
-            <button type="submit" class="btn btn-success">Simpan Perubahan</button>
+        <div class="d-flex justify-content-between mt-4">
+            <a href="{{ route('users.index') }}" class="btn btn-outline-secondary btn-sm">
+                <i class="fas fa-arrow-left me-1"></i> Batal
+            </a>
+            <button type="submit" class="btn btn-outline-success btn-sm">
+                <i class="fas fa-save me-1"></i> Simpan Perubahan
+            </button>
         </div>
+
+
     </form>
 @endsection
